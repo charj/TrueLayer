@@ -7,11 +7,11 @@ use TrueLayer\Exceptions\OauthTokenInvalid;
 use TrueLayer\Request;
 
 class Identity extends Request
-{
+{   
     /**
      * Get all providers
      *
-     * @return mixed
+     * @return Customer
      * @throws OauthTokenInvalid
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -26,6 +26,7 @@ class Identity extends Request
         }
 
         $data = json_decode($result->getBody(), true);
+
         return new Customer($data['results']);
     }
 }
