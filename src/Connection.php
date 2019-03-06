@@ -158,6 +158,7 @@ class Connection
     public function getState()
     {
         $this->state = $this->state ? $this->state : uniqid("tl", true);
+
         return $this->state;
     }
 
@@ -178,7 +179,6 @@ class Connection
         ]));
     }
 
-
     /**
      * Build an Authorization Link
      *
@@ -187,7 +187,6 @@ class Connection
      */
     public function getAuthorizationLink()
     {
-
         return self::AUTH_PATH . "/" .
             "?response_type=code" .
             "&client_id=" . $this->getClientId() .
@@ -232,6 +231,7 @@ class Connection
         }
 
         $token = json_decode($result->getBody(), true);
+
         return new Token($token);
     }
 
@@ -259,11 +259,12 @@ class Connection
             ]
         );
 
-        if ((int)$result->getStatusCode() > 400) {
+        if ((int) $result->getStatusCode() > 400) {
             throw new InvalidCodeExchange;
         }
 
         $token = json_decode($result->getBody(), true);
+
         return new Token($token);
     }
 
@@ -297,11 +298,12 @@ class Connection
      * Set out access_token
      *
      * @param $token
-     * @return $this
+     * @return Connection
      */
     public function setAccessToken($token)
     {
         $this->access_token = $token;
+
         return $this;
     }
 }
